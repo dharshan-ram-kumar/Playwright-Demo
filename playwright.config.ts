@@ -27,12 +27,14 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL:
-    //   "http://192.168.1.47:8082/orangehrm-5.7/orangehrm-5.7/web/index.php",
+    baseURL:
+      process.env.BASE_URL ||
+      "http://192.168.1.47:8082/orangehrm-5.7/orangehrm-5.7/web/index.php",
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: "on-first-retry",
+    trace: "retain-on-failure",
     screenshot: "only-on-failure",
+    // video: "retain-on-failure",
   },
 
   /* Configure projects for major browsers */
@@ -79,5 +81,4 @@ export default defineConfig({
   //   url: 'http://localhost:3000',
   //   reuseExistingServer: !process.env.CI,
   // },
-  // grep: /@focus/,
 });
