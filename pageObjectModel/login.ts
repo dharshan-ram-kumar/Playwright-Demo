@@ -1,16 +1,18 @@
-import { Page, Locator, expect } from "@playwright/test";
+import { Page, Locator } from "@playwright/test";
 
 export class Login {
   private usernameInput: Locator;
   private passwordInput: Locator;
   private loginButton: Locator;
   private message: Locator;
+  private requiredMessage: Locator;
 
   constructor(page: Page) {
     this.usernameInput = page.locator('input[name="username"]');
     this.passwordInput = page.locator('input[name="password"]');
     this.loginButton = page.locator("button", { hasText: "Login" });
     this.message = page.locator("div[role='alert']");
+    this.requiredMessage = page.getByText("Required");
   }
 
   //   async fillUsername(username: string) {
@@ -27,6 +29,9 @@ export class Login {
 
   async getMessage() {
     return await this.message.textContent();
+  }
+  async requiredGetMessage() {
+    return await this.requiredMessage.textContent();
   }
   async login(username: string, password: string) {
     // await this.fillUsername(username);
