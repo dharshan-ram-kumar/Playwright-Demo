@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { baseURl } from "../config";
+import { baseURl, password, username } from "../config";
 
 test.describe("Using Locators", () => {
   test.beforeEach("Login", async ({ page }) => {
@@ -8,11 +8,11 @@ test.describe("Using Locators", () => {
 
     await expect(page.getByRole("button", { name: "Login" })).toBeVisible();
     await expect(page.getByText("Username")).toBeVisible();
-    await page.locator('input[name="username"]').fill("princep");
+    await page.locator('input[name="username"]').fill(username || "princep");
     await expect(page.getByText(/Password/)).toBeVisible();
     await page
       .locator("//input[@placeholder='Password']")
-      .fill(process.env.PASSWORD || "Welcome@ta2025");
+      .fill(password || "Welcome@ta2025");
     await expect(page.getByRole("button", { name: "Login" })).toBeVisible();
     await page.locator("button", { hasText: "Login" }).click();
     // await page.waitForTimeout(5000);
