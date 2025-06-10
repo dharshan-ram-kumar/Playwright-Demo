@@ -19,23 +19,29 @@ export default defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 2 : 1,
   /* Opt out of parallel tests on CI. */
-  workers: 1,
+  workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   // reporter: "line",
-  reporter: [["html", { open: "never" }]],
+  reporter: [
+    ["list"],
+    ["allure-playwright"],
+    ["json", { outputFile: "test-results/report.json" }],
+    ["html", { outputFolder: "playwright-report" }],
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL:
-      process.env.BASE_URL ||
-      "http://192.168.1.47:8082/orangehrm-5.7/orangehrm-5.7/web/index.php",
+    // baseURL:
+    //   process.env.BASE_URL ||
+    //   "http://192.168.1.47:8082/orangehrm-5.7/orangehrm-5.7/web/index.php",
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    // trace: "retain-on-failure",
-    // screenshot: "only-on-failure",
-    // video: "retain-on-failure",
+    trace: "retain-on-failure",
+    screenshot: "only-on-failure",
+    video: "retain-on-failure",
+    // video: { mode: "retain-on-failure", size: { width: 1920, height: 1080 } },
   },
 
   /* Configure projects for major browsers */
@@ -44,18 +50,18 @@ export default defineConfig({
       name: "chromium",
       use: { ...devices["Desktop Chrome"] },
     },
-    {
-      name: "UI Tests",
-      testMatch: /.*ui.*\.spec\.ts/,
-      retries: 2,
-      workers: 1,
-    },
-    {
-      name: "API Tests",
-      testMatch: /.*api.*\.spec\.ts/,
-      retries: 1,
-      workers: 2,
-    },
+    // {
+    //   name: "UITests",
+    //   testMatch: /.*ui.*\.spec\.ts/,
+    //   retries: 2,
+    //   workers: 1,
+    // },
+    // {
+    //   name: "APITests",
+    //   testMatch: /.*api.*\.spec\.ts/,
+    //   retries: 1,
+    //   workers: 2,
+    // },
     // {
     //   name: 'firefox',
     //   use: { ...devices['Desktop Firefox'] },
