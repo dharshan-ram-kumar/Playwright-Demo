@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { APIClient } from "../../api/api-client";
+import { APIClient } from "../apiTests/api-client";
 import { credentials } from "../../utils/apiData";
 import { publicAPI } from "../../config";
 

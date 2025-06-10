@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { publicAPI, publicUI } from "../../config";
 import { article, credentials } from "../../utils/apiData";
-import { APIClient } from "../../api/api-client";
+import { APIClient } from "../apiTests/api-client";
 
 test.beforeEach(async ({ page }) => {
   await page.goto(publicUI);
