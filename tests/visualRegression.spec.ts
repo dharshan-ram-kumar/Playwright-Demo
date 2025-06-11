@@ -26,6 +26,21 @@ test.describe("UI Tests - Login", () => {
     await expect(page.getByText("Global Feed")).toBeVisible();
   });
 
+  test("Simulate a visual regression by changing background color", async ({
+    page,
+  }) => {
+    await loginPage.login(credentials.email, credentials.password);
+    await page.evaluate(() => {
+      const row = document.querySelector(".row");
+      if (row) {
+        row.setAttribute("style", "background-color: red;");
+      }
+    });
+    await expect(page.locator(".row")).toHaveScreenshot();
+    await expect(page.locator(".navbar.navbar-light")).toBeVisible();
+    await expect(page.getByText("Global Feed")).toBeVisible();
+  });
+
   test("Login with invalid credentials", async ({ page }) => {
     await loginPage.login("email@example.com", "password");
     await expect(page.locator(".error-messages")).toBeVisible();
