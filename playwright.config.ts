@@ -14,6 +14,7 @@ dotenv.config({ path: path.resolve(__dirname, ".env") });
 export default defineConfig({
   // timeout: 30000,
   testDir: "./tests",
+  snapshotDir: "./snapshots",
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -51,6 +52,11 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"] },
     },
     // {
+    //   name: "Mobile",
+    //   testMatch: "login.spec.ts",
+    //   use: { ...devices["iPhone 12"] },
+    // },
+    // {
     //   name: "UITests",
     //   testMatch: /.*ui.*\.spec\.ts/,
     //   retries: 2,
@@ -76,10 +82,6 @@ export default defineConfig({
     // {
     //   name: 'Mobile Chrome',
     //   use: { ...devices['Pixel 5'] },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
     // },
 
     /* Test against branded browsers. */

@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
-import { LoginPage } from "./login";
-import { publicUI } from "../../config";
-import { credentials } from "../../utils/apiData";
+import { LoginPage } from "./parallelExecution/login";
+import { publicUI } from "../config";
+import { credentials } from "../utils/apiData";
 
 test.describe("UI Tests - Login", () => {
   let loginPage: LoginPage;
