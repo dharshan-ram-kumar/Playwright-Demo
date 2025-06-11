@@ -26,7 +26,7 @@ export default defineConfig({
   // reporter: "line",
   reporter: [
     ["list"],
-    // ["allure-playwright"],
+    ["allure-playwright"],
     // ["json", { outputFile: "test-results/report.json" }],
     ["html", { outputFolder: "playwright-report" }],
     // ["junit", { outputFile: "test-results/results.xml" }],
