@@ -46,7 +46,7 @@ test.describe("UI Tests - Login", () => {
     await expect(page.locator(".error-messages")).toBeVisible();
     await expect(page.locator(".row")).toHaveScreenshot();
   });
-  test.describe("Flaky Test", () => {
+  test.describe("Flaky Test Visual Regression", () => {
     test.describe.configure({ retries: 2 });
     test("Flaky login retry", async ({ page }, testInfo) => {
       console.log(`Retry #${testInfo.retry}`);
