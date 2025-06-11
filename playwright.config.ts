@@ -26,9 +26,11 @@ export default defineConfig({
   // reporter: "line",
   reporter: [
     ["list"],
-    ["allure-playwright"],
-    ["json", { outputFile: "test-results/report.json" }],
+    // ["allure-playwright"],
+    // ["json", { outputFile: "test-results/report.json" }],
     ["html", { outputFolder: "playwright-report" }],
+    // ["junit", { outputFile: "test-results/results.xml" }],
+    // ["line"]
   ],
   expect: {
     toMatchSnapshot: {
