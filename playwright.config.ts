@@ -14,7 +14,6 @@ dotenv.config({ path: path.resolve(__dirname, ".env") });
 export default defineConfig({
   // timeout: 30000,
   testDir: "./tests",
-  snapshotDir: "./snapshots",
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -31,6 +30,11 @@ export default defineConfig({
     ["json", { outputFile: "test-results/report.json" }],
     ["html", { outputFolder: "playwright-report" }],
   ],
+  expect: {
+    toMatchSnapshot: {
+      maxDiffPixels: 100,
+    },
+  },
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */

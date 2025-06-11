@@ -21,6 +21,7 @@ test.describe("UI Tests - Login", () => {
 
   test("Login with valid credentials", async ({ page }) => {
     await loginPage.login(credentials.email, credentials.password);
+    await expect(page.locator(".row")).toHaveScreenshot();
     await expect(page.locator(".navbar.navbar-light")).toBeVisible();
     await expect(page.getByText("Global Feed")).toBeVisible();
   });
@@ -28,6 +29,7 @@ test.describe("UI Tests - Login", () => {
   test("Login with invalid credentials", async ({ page }) => {
     await loginPage.login("email@example.com", "password");
     await expect(page.locator(".error-messages")).toBeVisible();
+    await expect(page.locator(".row")).toHaveScreenshot();
   });
   test.describe("Flaky Test", () => {
     test.describe.configure({ retries: 2 });
@@ -35,9 +37,10 @@ test.describe("UI Tests - Login", () => {
       console.log(`Retry #${testInfo.retry}`);
 
       const password =
-        testInfo.retry === 2 ? credentials.password : credentials.email;
+        testInfo.retry === 1 ? credentials.password : credentials.email;
 
       await loginPage.login(credentials.email, password);
+      await expect(page.locator(".row")).toHaveScreenshot();
       await expect(page.getByText("Global Feed")).toBeVisible();
     });
   });
